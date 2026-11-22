@@ -1,0 +1,9 @@
+WARN  [man-of-action] frontmatter 列了 ['S1'] 但內文沒用到
+WARN  [films-and-media] frontmatter 列了 ['S8'] 但內文沒用到
+WARN  [facts.finale_specials] 值「2021 年 4 月 3 部特別篇」沒有出現在任何 wiki 頁面
+ERROR [man-of-action] 內文引用 ['S6'] 未列在 frontmatter
+ERROR [films-and-media] 含數字但沒有來源標記：- 動畫：Secret of the Omnitrix（2007）、Destroy All Aliens（2012）、V
+ERROR [films-and-media] 含數字但沒有來源標記：- 真人：Race Against Time（2007）、Alien Swarm（2009）
+ERROR [overview] 內文引用 ['S3', 'S4'] 未列在 frontmatter
+
+頁面 9｜事實 34｜ERROR 4｜WARN 3

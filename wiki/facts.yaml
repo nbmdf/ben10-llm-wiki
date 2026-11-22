@@ -1,0 +1,149 @@
+# 關鍵事實表。簡報上的每個數字/日期必須對應到這裡 status 為 verified 或 resolved 的條目。
+creator:
+  value: "Man of Action（Duncan Rouleau、Joe Casey、Joe Kelly、Steven T. Seagle）"
+  sources: [S1, S2]
+  status: verified
+producer:
+  value: "Cartoon Network Studios"
+  sources: [S1, S2]
+  status: verified
+concept_years:
+  value: "約 3 年"
+  note: "Man of Action 在 CN 接案前約花 3 年發想"
+  sources: [S2]
+  status: verified
+first_air:
+  value: "2005-12-27"
+  note: "首集搶先播出；正式定期播出為 2006 年 1 月"
+  sources: [S2, S9]
+  status: resolved
+original_years:
+  value: "2005–2008"
+  sources: [S1, S2]
+  status: verified
+original_episodes:
+  value: "49"
+  sources: [S1]
+  status: resolved
+ben_age_original:
+  value: "10"
+  sources: [S2, S7]
+  status: verified
+original_aliens:
+  value: "10"
+  sources: [S7]
+  status: verified
+alien_force_years:
+  value: "2008–2010"
+  sources: [S1, S3]
+  status: verified
+alien_force_episodes:
+  value: "46"
+  sources: [S1, S3]
+  status: verified
+ben_age_alien_force:
+  value: "15"
+  note: "原作 5 年後"
+  sources: [S3]
+  status: verified
+time_skip:
+  value: "5"
+  sources: [S3]
+  status: verified
+ultimate_alien_years:
+  value: "2010–2012"
+  sources: [S1, S4]
+  status: verified
+ultimate_alien_episodes:
+  value: "52"
+  sources: [S1, S4]
+  status: verified
+ben_age_ultimate:
+  value: "16"
+  sources: [S4]
+  status: verified
+omniverse_years:
+  value: "2012–2014"
+  sources: [S1, S5]
+  status: verified
+omniverse_episodes:
+  value: "80"
+  note: "8 個故事弧 × 10 集"
+  sources: [S1, S5]
+  status: verified
+omniverse_arcs:
+  value: "8"
+  sources: [S5]
+  status: verified
+omniverse_premiere:
+  value: "2012-09-22"
+  note: "2012-08-01 為搶先看"
+  sources: [S5]
+  status: resolved
+reboot_years:
+  value: "2016–2021"
+  sources: [S1, S6]
+  status: verified
+reboot_episodes:
+  value: "166"
+  sources: [S1, S6]
+  status: resolved
+reboot_premiere:
+  value: "2016-10-01"
+  note: "澳洲/紐西蘭/亞太先播；美國 2017-04-10"
+  sources: [S6]
+  status: verified
+reboot_episode_length:
+  value: "11"
+  sources: [S6]
+  status: verified
+series_count:
+  value: "5"
+  sources: [S1]
+  status: verified
+continuity_count:
+  value: "2"
+  sources: [S1]
+  status: verified
+total_episodes:
+  value: "393"
+  note: "49+46+52+80+166；S1 也寫 393"
+  sources: [S1]
+  status: resolved
+films:
+  value: "5"
+  note: "動畫 3 + 真人 2"
+  sources: [S1]
+  status: resolved
+live_action_films:
+  value: "2"
+  sources: [S1]
+  status: verified
+emmys:
+  value: "3"
+  note: "皆為 Daytime Emmy：2007、2009、2013"
+  sources: [S1]
+  status: verified
+finale_specials:
+  value: "Ben 10,010、Ben Gen 10、Alien X-Tinction"
+  note: "2021 年 4 月，3 部 44 分鐘特別篇"
+  sources: [S1, S6]
+  status: verified
+cn_rank:
+  value: "Cartoon Network 第二長壽的現存系列"
+  sources: [S1]
+  status: resolved
+video_games:
+  value: "12"
+  note: "2006–2020"
+  sources: [S1]
+  status: verified
+anniversary:
+  value: "2025-12-27 滿 20 週年"
+  sources: [S9]
+  status: verified
+retail_sales:
+  value: "超過 60 億美元零售額"
+  sources: [X1]
+  status: excluded
+  note: "只有舊鏡像與 fandom 有此數字，現行 Wikipedia 已無 → 不得用於簡報"

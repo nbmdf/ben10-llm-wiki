@@ -1,0 +1,57 @@
+# Query 節點輸出：每頁簡報 = 一個學習者會問的問題 → 從 Wiki 查到的頁面與事實
+- id: cover
+  question: "這份簡報要教什麼？"
+  wiki: [overview]
+  facts: []
+- id: one-line
+  question: "Ben 10 用一句話說是什麼？"
+  wiki: [overview]
+  facts: [ben_age_original, series_count, continuity_count]
+- id: creators
+  question: "誰做的？什麼時候開始？"
+  wiki: [man-of-action, overview]
+  facts: [creator, producer, concept_years, first_air, anniversary]
+- id: omnitrix
+  question: "Omnitrix 是什麼？"
+  wiki: [omnitrix]
+  facts: [original_aliens]
+- id: aliens
+  question: "一開始能變哪些外星人？"
+  wiki: [omnitrix]
+  facts: [original_aliens]
+- id: characters
+  question: "主要角色有誰？"
+  wiki: [characters]
+  facts: [ben_age_original]
+- id: timeline
+  question: "總共有哪幾部？順序是？"
+  wiki: [series-timeline]
+  facts: [original_years, original_episodes, alien_force_years, alien_force_episodes, ultimate_alien_years, ultimate_alien_episodes, omniverse_years, omniverse_episodes, reboot_years, reboot_episodes, total_episodes]
+- id: growing-up
+  question: "為什麼說 Ben 會「長大」？"
+  wiki: [series-timeline, characters, omnitrix]
+  facts: [ben_age_original, ben_age_alien_force, ben_age_ultimate, time_skip]
+- id: continuity
+  question: "為什麼有兩部都叫 Ben 10？"
+  wiki: [continuity]
+  facts: [continuity_count, reboot_premiere, finale_specials, original_years, reboot_years]
+- id: media
+  question: "除了電視還有什麼？"
+  wiki: [films-and-media]
+  facts: [films, live_action_films, video_games]
+- id: impact
+  question: "它有多重要？"
+  wiki: [impact]
+  facts: [emmys, cn_rank, anniversary]
+- id: start-watching
+  question: "新手該從哪開始看？"
+  wiki: [continuity, series-timeline]
+  facts: [reboot_episode_length, omniverse_arcs, original_years, reboot_years]
+- id: quiz
+  question: "我學會了嗎？"
+  wiki: [overview, omnitrix, continuity]
+  facts: [ben_age_original, ben_age_alien_force, ben_age_ultimate, reboot_years, original_years]
+- id: recap
+  question: "重點回顧與資料來源"
+  wiki: [overview, continuity, conflicts, index, sources]
+  facts: [series_count, continuity_count, original_years, reboot_years]

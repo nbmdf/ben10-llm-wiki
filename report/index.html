@@ -1,0 +1,731 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ben 10 LLM Wiki 與作業報告</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c1117;--panel:#141b24;--line:#253041;--ink:#e9eef4;--mute:#93a1b3;--acc:#8be36a;--acc2:#5cc8ff;--warn:#ffb84d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Noto Sans TC",system-ui,sans-serif;display:flex;min-height:100vh}
+nav{width:250px;flex:none;border-right:1px solid var(--line);padding:22px 14px;position:sticky;top:0;height:100vh;overflow:auto;background:#0a0e13}
+nav .brand{font-weight:900;font-size:18px;margin:0 8px 14px}nav a{display:block;color:var(--mute);text-decoration:none;padding:5px 10px;border-radius:7px;font-size:14.5px}
+nav a:hover,nav a.on{background:var(--panel);color:var(--ink)}nav a.on{box-shadow:inset 3px 0 var(--acc)}.navh{font-size:12px;letter-spacing:.12em;color:#5d6b7d;margin:16px 10px 4px}
+main{flex:1;min-width:0;padding:40px 56px 80px;max-width:1080px}
+.view{display:none}.view.on{display:block}
+h1{font-size:34px;line-height:1.25;margin:.2em 0 .6em}h2{font-size:22px;margin:1.8em 0 .6em;color:var(--acc)}
+.kicker{color:var(--acc);letter-spacing:.14em;font-size:13px}.crumb{color:#5d6b7d;font-size:13px;font-family:monospace}
+.lead{font-size:18px;color:#cfd8e3}a{color:var(--acc2)}a.src{font-size:12px;text-decoration:none;background:#1b2836;border-radius:4px;padding:0 4px;margin-left:2px}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14.5px}th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}th{background:var(--panel)}
+code{background:#1b2430;padding:1px 6px;border-radius:5px;font-size:13.5px}
+pre{background:#070a0e;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:12.5px;line-height:1.55;overflow:auto;white-space:pre-wrap}
+details{margin:10px 0}summary{cursor:pointer;color:var(--ink);font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin:26px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px}.card:hover{border-color:var(--acc)}.card span{color:var(--mute);font-size:14px}
+.st{font-size:12px;padding:1px 8px;border-radius:99px}.verified{background:#1d3a20;color:#a9f08c}.resolved{background:#3a311b;color:#ffd38a}.excluded{background:#3a1e22;color:#ff9aa2}
+.mute{color:var(--mute)}.svgwrap{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px;overflow:auto}.svgwrap svg{width:100%;min-width:760px;height:auto}
+.flow{background:var(--panel);border-radius:10px;padding:14px 18px}blockquote{border-left:3px solid var(--warn);margin:12px 0;padding:4px 14px;color:#e8d3a8}
+@media(max-width:820px){body{display:block}nav{position:static;width:auto;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:24px 18px}}
+</style></head><body>
+<nav><div class="brand">Ben 10 LLM Wiki</div><a href="#home">繳交總覽</a><a href="https://claude.ai/artifact/BN5epi2Rvi2YPXAUv1oiVR">教學簡報 ↗</a>
+<div class="navh">Wiki</div><a href="#schema">Schema 規則</a><a href="#wiki-overview">Ben 10 是什麼？（總覽）</a><a href="#wiki-man-of-action">Man of Action（創作團隊）</a><a href="#wiki-omnitrix">Omnitrix（變身手錶）</a><a href="#wiki-characters">主要角色與反派</a><a href="#wiki-series-timeline">五部電視動畫時間軸</a><a href="#wiki-continuity">兩條時間線（經典 vs 重啟）</a><a href="#wiki-films-and-media">電影、遊戲與周邊</a><a href="#wiki-impact">影響力與成就</a><a href="#wiki-conflicts">資料衝突與裁決紀錄</a><a href="#facts">事實表 facts</a><a href="#sources">來源 sources</a>
+<div class="navh">流程</div><a href="#graph">Loop / Graph</a><a href="#run">執行紀錄</a><a href="#reflect">反思</a></nav>
+<main>
+<section class="view" id="home">
+<div class="kicker">作業繳交總覽</div>
+<h1>Ben 10 LLM Wiki → 教學 HTML 簡報</h1>
+<p class="lead">先用「先討論、後生成」的方式建立 Ben 10 主題的 LLM Wiki（ingest 9 篇可作依據的資料＋4 篇比對用資料），再讓 AI 只能用 Wiki 當知識來源，產生給新手看的教學簡報。每一步都有檢查節點，檢查失敗就退回對應節點重做。</p>
+<div class="cards">
+ <a class="card" href="#wiki-overview"><b>1–2. LLM Wiki</b><span>9 個主題頁、34 條事實、8 個衝突裁決</span></a>
+ <a class="card" href="https://claude.ai/artifact/BN5epi2Rvi2YPXAUv1oiVR"><b>3. 教學 HTML 簡報 ↗</b><span>14 頁，←→ 翻頁，含小測驗</span></a>
+ <a class="card" href="#graph"><b>4. Loop / Graph</b><span>11 個節點、4 個檢查節點、7 條退回邊</span></a>
+ <a class="card" href="#run"><b>5. 實際執行紀錄</b><span>19 步，含每次檢查的原始輸出</span></a>
+ <a class="card" href="#reflect"><b>6. 反思</b><span>最常出錯的節點與調整</span></a>
+</div>
+<h2>Wiki 主題簡介</h2>
+<p><b>主題：Ben 10 動畫系列入門。</b>Ben 10 是 Man of Action 構思、Cartoon Network Studios 製作的美國科幻英雄動畫：10 歲男孩 Ben 撿到外星手錶 Omnitrix，能變身成各種外星人。系列共 5 部電視動畫、分成經典與重啟 2 條時間線。這個 Wiki 的讀者設定是「完全沒看過的人」，所以內容聚焦在核心概念、作品順序與入門建議，不追劇情細節。</p>
+<h2>Wiki 結構（Karpathy 式三層）</h2>
+<table><tr><th>層</th><th>檔案</th><th>作用</th></tr>
+<tr><td>Raw 原始層</td><td><code>raw/sources.yaml</code>、<code>raw/notes.md</code></td><td>登錄來源、逐篇改寫摘要；只追加不改原意</td></tr>
+<tr><td>Wiki 知識層</td><td><code>wiki/*.md</code>、<code>wiki/facts.yaml</code></td><td>LLM 撰寫的主題頁＋關鍵事實表（每條有來源與 status）</td></tr>
+<tr><td>Schema 規則層</td><td><code>SCHEMA.md</code>、<code>index.md</code>、<code>log.md</code></td><td>LLM 每次操作前要讀的規則、目錄、操作紀錄</td></tr></table>
+</section>
+
+<section class="view" id="schema"><div class="crumb">SCHEMA.md</div><h1>Schema（維護規則）</h1><p>這份檔案是 LLM 維護 Wiki 的「規則書」，每次 ingest / query / lint 前都先讀。</p>
+<h2>三層結構</h2>
+<ol>
+<li><code>raw/</code>：原始資料層。<code>sources.yaml</code> 登錄每篇來源，<code>notes.md</code> 是逐篇改寫摘要。<strong>不可修改原意，只能追加。</strong></li>
+<li><code>wiki/</code>：知識層。LLM 撰寫的主題頁面，每頁頂端有 frontmatter（title / sources / updated）。</li>
+<li><code>wiki/facts.yaml</code>：事實表。所有「數字、日期、名稱」類的關鍵事實集中在這裡，每條都要有 <code>sources</code> 和 <code>status</code>。</li>
+</ol>
+<h2>事實 status 規則</h2>
+<ul>
+<li><code>verified</code>：至少 1 個 high 可信來源，且沒有其他來源矛盾。</li>
+<li><code>resolved</code>：來源之間有衝突，已在 <code>wiki/conflicts.md</code> 寫下裁決理由。</li>
+<li><code>excluded</code>：無法用 high 來源證實 → <strong>簡報不可使用</strong>。</li>
+</ul>
+<h2>頁面規則</h2>
+<ul>
+<li>每個段落的事實要加 <code>[S#]</code> 來源標記；只能用 <code>raw/sources.yaml</code> 有登錄的 ID。</li>
+<li>頁面之間用 <code>[[page-name]]</code> 互相連結，連結目標必須存在。</li>
+<li>低可信來源（X#）只能出現在 <code>conflicts.md</code>，不能當作事實依據。</li>
+</ul>
+<h2>三種操作</h2>
+<ul>
+<li><strong>Ingest</strong>：新資料 → 寫進 raw → 更新相關 wiki 頁與 facts.yaml → 跑 lint → 記一筆 log。</li>
+<li><strong>Query</strong>：回答問題（例如「簡報第 3 頁要講什麼」）時，只能用 wiki 頁與 facts.yaml，答案要附上 fact key。</li>
+<li><strong>Lint</strong>：<code>python3 tools/lint_wiki.py</code>，檢查來源標記、斷鏈、缺 status、衝突未裁決。</li>
+</ul></section>
+<section class="view" id="wiki-overview"><div class="crumb">Wiki / overview.md</div><h1>Ben 10 是什麼？</h1>
+<p><strong>一句話</strong>：一個 10 歲男孩撿到一支外星手錶，可以變身成不同外星人，從此展開英雄冒險的美國科幻動畫系列。<a class="src" href="#sources">S1</a><a class="src" href="#sources">S7</a></p>
+<ul>
+<li><strong>誰做的</strong>：由漫畫創作團隊 Man of Action 構思，Cartoon Network Studios 製作。→ <a href="#wiki-man-of-action">man-of-action</a> <a class="src" href="#sources">S1</a><a class="src" href="#sources">S2</a></li>
+<li><strong>核心道具</strong>：Omnitrix，一支內含外星生物 DNA 的手錶型裝置。→ <a href="#wiki-omnitrix">omnitrix</a> <a class="src" href="#sources">S1</a></li>
+<li><strong>主角</strong>：Ben Tennyson，原作中 10 歲。→ <a href="#wiki-characters">characters</a> <a class="src" href="#sources">S7</a></li>
+<li><strong>規模</strong>：5 部電視動畫、分成 2 條時間線，另有電影與遊戲。→ <a href="#wiki-series-timeline">series-timeline</a>、<a href="#wiki-continuity">continuity</a>、<a href="#wiki-films-and-media">films-and-media</a> <a class="src" href="#sources">S1</a></li>
+<li><strong>地位</strong>：2005 年 12 月首播，2025 年底滿 20 週年；是 Cartoon Network 第二長壽的現存系列。→ <a href="#wiki-impact">impact</a> <a class="src" href="#sources">S1</a><a class="src" href="#sources">S9</a></li>
+</ul>
+<h2>給完全沒看過的人：三個關鍵概念</h2>
+<ol>
+<li><strong>變身</strong>：Ben 按下 Omnitrix 就變成某個外星人，每個外星人有不同能力。<a class="src" href="#sources">S7</a></li>
+<li><strong>成長</strong>：系列跟著 Ben 長大——10 歲、15 歲、16 歲，故事也從輕鬆冒險變得更嚴肅。<a class="src" href="#sources">S3</a><a class="src" href="#sources">S4</a></li>
+<li><strong>兩條時間線</strong>：2005–2014 的四部是同一個故事；2016 年重啟版是另一個平行世界。<a class="src" href="#sources">S1</a></li>
+</ol></section><section class="view" id="wiki-man-of-action"><div class="crumb">Wiki / man-of-action.md</div><h1>Man of Action</h1>
+<ul>
+<li>四位漫畫創作者組成的團隊：Duncan Rouleau、Joe Casey、Joe Kelly、Steven T. Seagle。<a class="src" href="#sources">S2</a></li>
+<li>在 Cartoon Network 接下這個企劃之前，他們已經花了大約 3 年發想 Ben 10 的概念。<a class="src" href="#sources">S2</a></li>
+<li>Ben 10 是他們的第一部動畫作品；之後還做了 Generator Rex。<a class="src" href="#sources">S8</a></li>
+<li>2016 重啟版同樣由 Man of Action 創作。<a class="src" href="#sources">S6</a></li>
+</ul>
+<p>相關：<a href="#wiki-overview">overview</a>、<a href="#wiki-impact">impact</a></p></section><section class="view" id="wiki-omnitrix"><div class="crumb">Wiki / omnitrix.md</div><h1>Omnitrix</h1>
+<h2>它是什麼</h2>
+<ul>
+<li>一支手錶形狀的外星高科技裝置，裡面存有各種外星物種的 DNA，戴的人可以變身成那些外星人。<a class="src" href="#sources">S1</a></li>
+<li>一開始只有 10 種外星型態，之後 Ben 會陸續解鎖更多。<a class="src" href="#sources">S1</a><a class="src" href="#sources">S7</a></li>
+<li>原作裡 Ben 在森林裡撿到它，它會牢牢扣在手腕上。<a class="src" href="#sources">S7</a></li>
+<li>製作者是外星天才 Azmuth。（只有二手來源一致，未列入 facts.yaml，簡報不使用）</li>
+</ul>
+<h2>原作的 10 種外星人 <a class="src" href="#sources">S7</a></h2>
+<p>Heatblast、Wildmutt、Diamondhead、XLR8、Grey Matter、Four Arms、Stinkfly、Ripjaws、Upgrade、Ghostfreak。
+- 後來 Ghostfreak 的 DNA 逃出 Omnitrix，由 Cannonbolt 遞補。<a class="src" href="#sources">S7</a></p>
+<h2>裝置的演進</h2>
+<table>
+<thead>
+<tr>
+<th>系列</th>
+<th>裝置</th>
+<th>重點變化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ben 10（2005）</td>
+<td>Omnitrix</td>
+<td>10 種起始外星人 <a class="src" href="#sources">S7</a></td>
+</tr>
+<tr>
+<td>Alien Force</td>
+<td>重新校準的 Omnitrix</td>
+<td>外觀更像手錶，兼作 Plumber 徽章 <a class="src" href="#sources">S3</a></td>
+</tr>
+<tr>
+<td>Ultimate Alien</td>
+<td>Ultimatrix</td>
+<td>可把外星型態進化成更強的「Ultimate」型態 <a class="src" href="#sources">S4</a></td>
+</tr>
+</tbody>
+</table>
+<h2>教學比喻</h2>
+<p>可以把 Omnitrix 想成「一支裝滿角色卡的手錶」：每張卡是一種外星人的 DNA，選一張就變成那個角色——但要學會每個角色的能力與弱點，才能用對時機。</p>
+<p>相關：<a href="#wiki-characters">characters</a>、<a href="#wiki-series-timeline">series-timeline</a></p></section><section class="view" id="wiki-characters"><div class="crumb">Wiki / characters.md</div><h1>主要角色</h1>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>身分</th>
+<th>重點</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ben Tennyson</td>
+<td>主角</td>
+<td>原作 10 歲，暑假出遊時撿到 Omnitrix <a class="src" href="#sources">S7</a>；Alien Force 15 歲 <a class="src" href="#sources">S3</a>；Ultimate Alien 16 歲 <a class="src" href="#sources">S4</a></td>
+</tr>
+<tr>
+<td>Gwen Tennyson</td>
+<td>Ben 的表姊</td>
+<td>會魔法；Alien Force 裡魔法更成熟、個性更沉穩 <a class="src" href="#sources">S3</a></td>
+</tr>
+<tr>
+<td>Max Tennyson</td>
+<td>爺爺</td>
+<td>帶兩個孩子公路旅行；其實是星際執法組織 Plumbers 的半退休成員 <a class="src" href="#sources">S3</a><a class="src" href="#sources">S6</a></td>
+</tr>
+<tr>
+<td>Kevin Levin</td>
+<td>前宿敵 → 夥伴</td>
+<td>能吸收觸碰物質的特性；Alien Force 起改邪歸正加入 Ben <a class="src" href="#sources">S3</a></td>
+</tr>
+</tbody>
+</table>
+<h1>主要反派（依系列）</h1>
+<table>
+<thead>
+<tr>
+<th>系列</th>
+<th>主要反派</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原作（2005）</td>
+<td>星際軍閥 Vilgax（宿敵）<a class="src" href="#sources">S2</a><a class="src" href="#sources">S4</a></td>
+</tr>
+<tr>
+<td>Alien Force</td>
+<td>Highbreed（自認最純種族、想清洗宇宙）與爪牙 DNAliens <a class="src" href="#sources">S3</a></td>
+</tr>
+<tr>
+<td>Ultimate Alien</td>
+<td>Aggregor、Forever Knights／Dagon，以及回歸的 Vilgax <a class="src" href="#sources">S4</a></td>
+</tr>
+</tbody>
+</table>
+<h1>組織</h1>
+<ul>
+<li><strong>Plumbers</strong>：星際執法組織，像「宇宙警察」。<a class="src" href="#sources">S3</a></li>
+</ul>
+<p>相關：<a href="#wiki-omnitrix">omnitrix</a>、<a href="#wiki-series-timeline">series-timeline</a></p></section><section class="view" id="wiki-series-timeline"><div class="crumb">Wiki / series-timeline.md</div><h1>五部電視動畫</h1>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>作品</th>
+<th>年份</th>
+<th>集數</th>
+<th>Ben 年齡</th>
+<th>一句話特色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Ben 10</td>
+<td>2005–2008</td>
+<td>49</td>
+<td>10</td>
+<td>暑假跟爺爺、表姊公路旅行時的冒險 <a class="src" href="#sources">S1</a><a class="src" href="#sources">S2</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ben 10: Alien Force</td>
+<td>2008–2010</td>
+<td>46</td>
+<td>15</td>
+<td>5 年後，調性變暗，Ben 成為領導者 <a class="src" href="#sources">S1</a><a class="src" href="#sources">S3</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ben 10: Ultimate Alien</td>
+<td>2010–2012</td>
+<td>52</td>
+<td>16</td>
+<td>Ultimatrix；Ben 的身分被公開 <a class="src" href="#sources">S1</a><a class="src" href="#sources">S4</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Ben 10: Omniverse</td>
+<td>2012–2014</td>
+<td>80</td>
+<td>—</td>
+<td>8 個故事弧 × 10 集；經典時間線完結 <a class="src" href="#sources">S1</a><a class="src" href="#sources">S5</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Ben 10（重啟版）</td>
+<td>2016–2021</td>
+<td>166</td>
+<td>10</td>
+<td>平行世界、單集約 11 分鐘、更搞笑 <a class="src" href="#sources">S1</a><a class="src" href="#sources">S6</a></td>
+</tr>
+</tbody>
+</table>
+<p>合計 393 集（見 <a href="#wiki-conflicts">conflicts</a> C7）。<a class="src" href="#sources">S1</a></p>
+<h2>播出日期注意事項</h2>
+<ul>
+<li>原作：2005-12-27 首集搶先播出，正式定期播出是 2006 年 1 月（C1）。</li>
+<li>Omniverse：2012-08-01 搶先看，2012-09-22 正式首播（C2）。</li>
+<li>重啟版：2016-10-01 先在澳洲、紐西蘭、亞太播出，美國晚到 2017-04-10。<a class="src" href="#sources">S6</a></li>
+</ul>
+<p>相關：<a href="#wiki-continuity">continuity</a>、<a href="#wiki-characters">characters</a></p></section><section class="view" id="wiki-continuity"><div class="crumb">Wiki / continuity.md</div><h1>兩條時間線</h1>
+<ul>
+<li><strong>經典時間線</strong>：Ben 10 → Alien Force → Ultimate Alien → Omniverse，四部是同一個連續故事，角色會長大。<a class="src" href="#sources">S1</a></li>
+<li><strong>重啟時間線</strong>：2016 年的 Ben 10 是平行世界，Ben 回到 10 歲，故事重新開始。<a class="src" href="#sources">S1</a><a class="src" href="#sources">S6</a></li>
+<li><strong>交會點</strong>：2021 年 4 月的 3 部特別篇（Ben 10,010、Ben Gen 10、Alien X-Tinction）是重啟版完結篇，也讓兩條時間線跨界連動。<a class="src" href="#sources">S1</a></li>
+</ul>
+<h2>新手怎麼選？</h2>
+<ul>
+<li>想看「長大的故事」→ 從 2005 原作照順序看。</li>
+<li>想要短、輕鬆、適合小孩 → 2016 重啟版（單集約 11 分鐘）。<a class="src" href="#sources">S6</a></li>
+</ul>
+<p>相關：<a href="#wiki-series-timeline">series-timeline</a></p></section><section class="view" id="wiki-films-and-media"><div class="crumb">Wiki / films-and-media.md</div><h1>電影（共 5 部）<a class="src" href="#sources">S1</a></h1>
+<ul>
+<li>動畫：Secret of the Omnitrix（2007）、Destroy All Aliens（2012）、Versus the Universe（2020）<a class="src" href="#sources">S1</a></li>
+<li>真人：Race Against Time（2007）、Alien Swarm（2009）<a class="src" href="#sources">S1</a></li>
+</ul>
+<h1>遊戲</h1>
+<ul>
+<li>主線遊戲 12 款，從 2006 年到 2020 年的 Ben 10: Power Trip。<a class="src" href="#sources">S1</a></li>
+</ul>
+<h1>玩具</h1>
+<ul>
+<li>前四部由 Bandai 推出，2016 重啟版改由 Playmates Toys。<a class="src" href="#sources">S1</a></li>
+</ul>
+<p>相關：<a href="#wiki-impact">impact</a>、<a href="#wiki-conflicts">conflicts</a></p></section><section class="view" id="wiki-impact"><div class="crumb">Wiki / impact.md</div><h1>影響力與成就</h1>
+<ul>
+<li><strong>獎項</strong>：3 座 Emmy，全是 Daytime Emmy（2007、2009、2013）。<a class="src" href="#sources">S1</a></li>
+<li><strong>長壽</strong>：Cartoon Network 第二長壽的現存系列（不是「最長壽」，見 <a href="#wiki-conflicts">conflicts</a> C4）。<a class="src" href="#sources">S1</a></li>
+<li><strong>改變電視台路線</strong>：它的成功讓 CN 推出更多動作類原創節目，例如 Generator Rex、The Secret Saturdays。<a class="src" href="#sources">S8</a></li>
+<li><strong>時機</strong>：首播時 CN 正需要一部熱門作品；2025-12-27 滿 20 週年。<a class="src" href="#sources">S9</a></li>
+<li><strong>未來</strong>：Man of Action 仍希望推出新作，但目前沒有正式消息。<a class="src" href="#sources">S9</a></li>
+</ul>
+<blockquote>
+<p>注意：網路上常見「零售額超過 60 億美元」，但現行 Wikipedia 已無此數字，本 Wiki 標為 excluded（C8）。</p>
+</blockquote>
+<p>相關：<a href="#wiki-films-and-media">films-and-media</a>、<a href="#wiki-man-of-action">man-of-action</a></p></section><section class="view" id="wiki-conflicts"><div class="crumb">Wiki / conflicts.md</div><h1>資料衝突與裁決紀錄</h1>
+<p>Ingest 時把每個數字跟其他來源交叉比對，發現下列衝突。裁決原則：<strong>Wikipedia 現行版本 &gt; 新聞媒體 &gt; fandom / 鏡像</strong>；如果差異來自「定義不同」，就把定義寫清楚而不是二選一。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>事實</th>
+<th>衝突內容</th>
+<th>裁決</th>
+<th>facts.yaml key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>2005 原作首播日</td>
+<td>2005-12-27 <a class="src" href="#sources">S2</a> vs 2006-01-13／01-14 [S2 鏡像] vs 2006-01-07 <a class="src" href="#sources">X4</a></td>
+<td>定義不同：12/27 是首集搶先播出，2006 年 1 月才是正式定期播出。簡報寫「2005 年 12 月首播」。</td>
+<td>first_air</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Omniverse 首播日</td>
+<td>2012-08-01 <a class="src" href="#sources">X3</a> vs 2012-09-22 <a class="src" href="#sources">S5</a></td>
+<td>定義不同：8/1 是搶先看，9/22 是正式首播。</td>
+<td>omniverse_premiere</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>電影數量</td>
+<td>4 部 <a class="src" href="#sources">X1</a> vs 5 部 <a class="src" href="#sources">S1</a></td>
+<td>舊來源沒算到 2020 年的 Versus the Universe → 採 5 部。</td>
+<td>films</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>CN 最長壽？</td>
+<td>「最長壽」<a class="src" href="#sources">X1</a><a class="src" href="#sources">X2</a> vs「第二長壽的現存系列」<a class="src" href="#sources">S1</a></td>
+<td>採 S1 的保守說法。</td>
+<td>cn_rank</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>重啟版集數</td>
+<td>166 <a class="src" href="#sources">S1</a><a class="src" href="#sources">S6</a> vs 184 <a class="src" href="#sources">X3</a></td>
+<td>採 166（季集數 40+40+52+34 可加總驗證）。</td>
+<td>reboot_episodes</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>原作集數</td>
+<td>49 <a class="src" href="#sources">S1</a> vs 52 <a class="src" href="#sources">X4</a></td>
+<td>採 49。</td>
+<td>original_episodes</td>
+</tr>
+<tr>
+<td>C7</td>
+<td>總集數</td>
+<td>393 <a class="src" href="#sources">S1</a> vs 414 <a class="src" href="#sources">X2</a></td>
+<td>393 = 五部集數加總；414 可能含短片 → 採 393 並註明。</td>
+<td>total_episodes</td>
+</tr>
+<tr>
+<td>C8</td>
+<td>零售額</td>
+<td>「超過 60 億美元」<a class="src" href="#sources">X1</a> vs 現行 S1 無此數字</td>
+<td>無法用 high 來源證實 → <strong>excluded，簡報不用</strong>。</td>
+<td>retail_sales</td>
+</tr>
+</tbody>
+</table>
+<p>相關頁面：<a href="#wiki-series-timeline">series-timeline</a>、<a href="#wiki-impact">impact</a></p></section>
+<section class="view" id="facts"><div class="crumb">wiki/facts.yaml</div><h1>關鍵事實表</h1><p>簡報上每個數字都要對應到這裡 <span class="st verified">verified</span> 或 <span class="st resolved">resolved</span> 的條目；<span class="st excluded">excluded</span> 的條目不可使用。</p><table><tr><th>key</th><th>值</th><th>來源</th><th>status</th></tr><tr><td><code>creator</code></td><td>Man of Action（Duncan Rouleau、Joe Casey、Joe Kelly、Steven T. Seagle）</td><td>S1, S2</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>producer</code></td><td>Cartoon Network Studios</td><td>S1, S2</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>concept_years</code></td><td>約 3 年 <span class=mute>（Man of Action 在 CN 接案前約花 3 年發想）</span></td><td>S2</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>first_air</code></td><td>2005-12-27 <span class=mute>（首集搶先播出；正式定期播出為 2006 年 1 月）</span></td><td>S2, S9</td><td><span class='st resolved'>resolved</span></td></tr><tr><td><code>original_years</code></td><td>2005–2008</td><td>S1, S2</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>original_episodes</code></td><td>49</td><td>S1</td><td><span class='st resolved'>resolved</span></td></tr><tr><td><code>ben_age_original</code></td><td>10</td><td>S2, S7</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>original_aliens</code></td><td>10</td><td>S7</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>alien_force_years</code></td><td>2008–2010</td><td>S1, S3</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>alien_force_episodes</code></td><td>46</td><td>S1, S3</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>ben_age_alien_force</code></td><td>15 <span class=mute>（原作 5 年後）</span></td><td>S3</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>time_skip</code></td><td>5</td><td>S3</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>ultimate_alien_years</code></td><td>2010–2012</td><td>S1, S4</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>ultimate_alien_episodes</code></td><td>52</td><td>S1, S4</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>ben_age_ultimate</code></td><td>16</td><td>S4</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>omniverse_years</code></td><td>2012–2014</td><td>S1, S5</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>omniverse_episodes</code></td><td>80 <span class=mute>（8 個故事弧 × 10 集）</span></td><td>S1, S5</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>omniverse_arcs</code></td><td>8</td><td>S5</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>omniverse_premiere</code></td><td>2012-09-22 <span class=mute>（2012-08-01 為搶先看）</span></td><td>S5</td><td><span class='st resolved'>resolved</span></td></tr><tr><td><code>reboot_years</code></td><td>2016–2021</td><td>S1, S6</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>reboot_episodes</code></td><td>166</td><td>S1, S6</td><td><span class='st resolved'>resolved</span></td></tr><tr><td><code>reboot_premiere</code></td><td>2016-10-01 <span class=mute>（澳洲/紐西蘭/亞太先播；美國 2017-04-10）</span></td><td>S6</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>reboot_episode_length</code></td><td>11</td><td>S6</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>series_count</code></td><td>5</td><td>S1</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>continuity_count</code></td><td>2</td><td>S1</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>total_episodes</code></td><td>393 <span class=mute>（49+46+52+80+166；S1 也寫 393）</span></td><td>S1</td><td><span class='st resolved'>resolved</span></td></tr><tr><td><code>films</code></td><td>5 <span class=mute>（動畫 3 + 真人 2）</span></td><td>S1</td><td><span class='st resolved'>resolved</span></td></tr><tr><td><code>live_action_films</code></td><td>2</td><td>S1</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>emmys</code></td><td>3 <span class=mute>（皆為 Daytime Emmy：2007、2009、2013）</span></td><td>S1</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>finale_specials</code></td><td>Ben 10,010、Ben Gen 10、Alien X-Tinction <span class=mute>（2021 年 4 月，3 部 44 分鐘特別篇）</span></td><td>S1, S6</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>cn_rank</code></td><td>Cartoon Network 第二長壽的現存系列</td><td>S1</td><td><span class='st resolved'>resolved</span></td></tr><tr><td><code>video_games</code></td><td>12 <span class=mute>（2006–2020）</span></td><td>S1</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>anniversary</code></td><td>2025-12-27 滿 20 週年</td><td>S9</td><td><span class='st verified'>verified</span></td></tr><tr><td><code>retail_sales</code></td><td>超過 60 億美元零售額 <span class=mute>（只有舊鏡像與 fandom 有此數字，現行 Wikipedia 已無 → 不得用於簡報）</span></td><td>X1</td><td><span class='st excluded'>excluded</span></td></tr></table></section>
+<section class="view" id="sources"><div class="crumb">raw/sources.yaml</div><h1>Ingest 來源（13 篇）</h1><p>S1–S9 可作事實依據；X1–X4 是低可信來源，只用來找出衝突。method = snippet 表示整頁擷取被拒、改用搜尋摘要。</p><table><tr><th>ID</th><th>來源</th><th>方式</th><th>可信度</th></tr><tr><td><b>S1</b></td><td><a href='https://en.wikipedia.org/wiki/Ben_10'>Ben 10 (franchise) — Wikipedia</a></td><td>fetch</td><td>high</td></tr><tr><td><b>S2</b></td><td><a href='https://en.wikipedia.org/wiki/Ben_10_(2005_TV_series)'>Ben 10 (2005 TV series) — Wikipedia（含 wikipedia-on-ipfs / wikiwand 鏡像）</a></td><td>snippet</td><td>high</td></tr><tr><td><b>S3</b></td><td><a href='https://en.wikipedia.org/wiki/Ben_10:_Alien_Force'>Ben 10: Alien Force — Wikipedia</a></td><td>fetch</td><td>high</td></tr><tr><td><b>S4</b></td><td><a href='https://en.wikipedia.org/wiki/Ben_10:_Ultimate_Alien'>Ben 10: Ultimate Alien — Wikipedia</a></td><td>fetch</td><td>high</td></tr><tr><td><b>S5</b></td><td><a href='https://en.wikipedia.org/wiki/List_of_Ben_10:_Omniverse_episodes'>Ben 10: Omniverse／List of Omniverse episodes — Wikipedia</a></td><td>snippet</td><td>high</td></tr><tr><td><b>S6</b></td><td><a href='https://en.wikipedia.com/wiki/Ben_10_Reboot'>Ben 10 (2016 TV series) — Wikipedia（含 episode list）</a></td><td>snippet</td><td>high</td></tr><tr><td><b>S7</b></td><td><a href='https://wikipedia.com/wiki/Ben_Tennyson'>Ben Tennyson — Wikipedia</a></td><td>snippet</td><td>high</td></tr><tr><td><b>S8</b></td><td><a href='https://gizmodo.com/ben-10-was-first-and-foremost-for-kids-and-also-for-itself-2000703519'>Ben 10 Was First and Foremost for Kids—and Also for Itself — Gizmodo</a></td><td>snippet</td><td>medium</td></tr><tr><td><b>S9</b></td><td><a href='https://comicbook.com/tv-shows/feature/20-years-ago-cartoon-networks-coolest-superhero-show-debuted-a-multiverse-and-its-creators-want-to-bring-it-back/'>20 Years Ago, Cartoon Network&#x27;s Coolest Superhero Show Debuted — ComicBook.com</a></td><td>snippet</td><td>medium</td></tr><tr><td><b>X1</b></td><td><a href='https://ultimatepopculture.fandom.com/wiki/Ben_10'>Ben 10 — Ultimate Pop Culture Wiki (fandom)</a></td><td>snippet</td><td>low</td></tr><tr><td><b>X2</b></td><td><a href='https://tvtropes.org/pmwiki/pmwiki.php/VideoGame/Ben10'>Ben 10 — TV Tropes</a></td><td>snippet</td><td>low</td></tr><tr><td><b>X3</b></td><td><a href='https://zh.moegirl.org.cn/en/Ben_10%E7%B3%BB%E5%88%97'>Ben 10 系列 — 萌娘百科</a></td><td>snippet</td><td>low</td></tr><tr><td><b>X4</b></td><td><a href='https://boomerang-from-cartoon-network.fandom.com/wiki/Ben_10'>Ben 10 — Boomerang fandom wiki</a></td><td>snippet</td><td>low</td></tr></table></section>
+
+<section class="view" id="graph">
+<div class="kicker">步驟三</div><h1>Loop / Graph 設計</h1>
+<div class="svgwrap"><svg viewBox="0 0 980 480" xmlns="http://www.w3.org/2000/svg" font-family="Noto Sans TC, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#93a1b3"/></marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff8a65"/></marker>
+  </defs>
+  <style>
+    .w{fill:#141b24;stroke:#3a4a60;stroke-width:1.5}
+    .c{fill:#231d10;stroke:#ffb84d;stroke-width:1.8}
+    .n{fill:#122015;stroke:#8be36a;stroke-width:1.8;stroke-dasharray:6 4}
+    .t{fill:#e9eef4;font-size:15px;font-weight:700;text-anchor:middle}
+    .s{fill:#93a1b3;font-size:11.5px;text-anchor:middle}
+    .f{stroke:#93a1b3;stroke-width:1.6;fill:none;marker-end:url(#a)}
+    .b{stroke:#ff8a65;stroke-width:1.5;fill:none;stroke-dasharray:5 4;marker-end:url(#r)}
+    .bl{fill:#ff8a65;font-size:11.5px}
+    .row{fill:#5d6b7d;font-size:12px;letter-spacing:.1em}
+  </style>
+  <text x="20" y="40" class="row">建立 WIKI</text>
+  <text x="20" y="250" class="row">產生簡報</text>
+  <!-- row 1 -->
+  <rect class="w" x="20" y="70" width="130" height="58" rx="10"/><text class="t" x="85" y="96">① 討論</text><text class="s" x="85" y="114">主題／讀者／範圍</text>
+  <rect class="w" x="190" y="70" width="130" height="58" rx="10"/><text class="t" x="255" y="96">② 取得</text><text class="s" x="255" y="114">搜尋＋擷取網頁</text>
+  <rect class="c" x="360" y="70" width="130" height="58" rx="10"/><text class="t" x="425" y="96">③ 匯入＋比對</text><text class="s" x="425" y="114">登錄來源、交叉比對</text>
+  <rect class="w" x="530" y="70" width="130" height="58" rx="10"/><text class="t" x="595" y="96">④ 編譯 Wiki</text><text class="s" x="595" y="114">頁面＋facts.yaml</text>
+  <rect class="c" x="700" y="70" width="130" height="58" rx="10"/><text class="t" x="765" y="96">⑤ Wiki Lint</text><text class="s" x="765" y="114">來源／斷鏈／衝突</text>
+  <path class="f" d="M150,99 H188"/><path class="f" d="M320,99 H358"/><path class="f" d="M490,99 H528"/><path class="f" d="M660,99 H698"/>
+  <!-- row1 back edges -->
+  <path class="b" d="M745,70 C730,30 625,30 610,68"/><text class="bl" x="672" y="44">失敗 → 修頁面</text>
+  <path class="b" d="M790,70 C780,2 270,2 262,68"/><text class="bl" x="440" y="14">缺資料 → 回去找新來源</text>
+  <path class="b" d="M440,70 C436,46 400,46 392,68"/><text class="bl" x="360" y="50">衝突 → 裁決</text>
+  <!-- down -->
+  <path class="f" d="M765,128 V175 H85 V268"/>
+  <!-- row 2 -->
+  <rect class="w" x="20" y="270" width="130" height="58" rx="10"/><text class="t" x="85" y="296">⑥ 查詢 Wiki</text><text class="s" x="85" y="314">大綱：問題＋事實</text>
+  <rect class="n" x="190" y="270" width="130" height="58" rx="10"/><text class="t" x="255" y="296">⑦ 大綱檢查</text><text class="s" x="255" y="314">反思後新增</text>
+  <rect class="w" x="360" y="270" width="130" height="58" rx="10"/><text class="t" x="425" y="296">⑧ 生成簡報</text><text class="s" x="425" y="314">HTML 投影片</text>
+  <rect class="c" x="530" y="270" width="130" height="58" rx="10"/><text class="t" x="595" y="296">⑨ 依據檢查</text><text class="s" x="595" y="314">數字／名詞可追溯</text>
+  <rect class="c" x="700" y="270" width="130" height="58" rx="10"/><text class="t" x="765" y="296">⑩ 渲染＋目視</text><text class="s" x="765" y="314">截圖、裁切、留白</text>
+  <rect class="w" x="850" y="270" width="110" height="58" rx="10"/><text class="t" x="905" y="296">⑪ 發布</text><text class="s" x="905" y="314">網頁連結</text>
+  <path class="f" d="M150,299 H188"/><path class="f" d="M320,299 H358"/><path class="f" d="M490,299 H528"/><path class="f" d="M660,299 H698"/><path class="f" d="M830,299 H848"/>
+  <!-- row2 back edges -->
+  <path class="b" d="M255,270 C270,220 560,200 585,130"/><text class="bl" x="330" y="225">缺事實 → 先補 Wiki</text>
+  <path class="b" d="M440,270 C470,230 590,200 605,130"/><text class="bl" x="488" y="250">生成需要新事實 → 回 ④</text>
+  <path class="b" d="M570,328 C560,372 120,372 90,330"/><text class="bl" x="280" y="384">漏宣告事實 → 回 ⑥</text>
+  <path class="b" d="M615,328 C610,412 450,412 440,330"/><text class="bl" x="470" y="420">多編內容 → 重新生成 ⑧</text>
+  <path class="b" d="M780,328 C775,465 430,465 420,330"/><text class="bl" x="560" y="462">裁切／留白 → 改版面 ⑧</text>
+  <!-- legend -->
+  <rect class="w" x="850" y="380" width="16" height="12" rx="3"/><text x="872" y="391" fill="#93a1b3" font-size="12">處理節點</text>
+  <rect class="c" x="850" y="400" width="16" height="12" rx="3"/><text x="872" y="411" fill="#93a1b3" font-size="12">檢查節點</text>
+  <rect class="n" x="850" y="420" width="16" height="12" rx="3"/><text x="872" y="431" fill="#93a1b3" font-size="12">反思後新增</text>
+  <line x1="850" y1="446" x2="866" y2="446" class="b"/><text x="872" y="450" fill="#93a1b3" font-size="12">失敗退回</text>
+</svg>
+</div>
+<h2>流程（文字版）</h2>
+<p class="flow">討論 → 取得 → 匯入＋交叉比對 → 編譯 Wiki → <b>Wiki Lint</b> → 查詢 Wiki（大綱）→ <b>大綱檢查</b> → 生成簡報 → <b>依據檢查</b> → <b>渲染＋目視檢查</b> → 發布</p>
+<h2>哪些步驟會重複執行？</h2>
+<ul>
+<li><b>取得 → 匯入 → 編譯 → Lint</b> 是一個迴圈：每多 ingest 一篇資料就跑一輪，lint 沒過就不能往下走。</li>
+<li><b>查詢 → 大綱檢查</b>：大綱要用的事實如果 Wiki 沒有，就回到「編譯 Wiki」先補，再重新查詢。這次 Cannonbolt 就是這樣補進 Wiki 的。</li>
+<li><b>生成 → 依據檢查 → 渲染檢查</b>：內層迴圈，這次跑了 2 輪依據檢查、4 輪渲染檢查才全部通過。</li>
+</ul>
+<h2>哪些地方需要檢查或重新生成？</h2>
+<table><tr><th>檢查節點</th><th>檢查什麼</th><th>失敗退回</th><th>工具</th></tr>
+<tr><td>③ 匯入時交叉比對</td><td>同一個數字在不同來源是否一致</td><td>寫進 conflicts.md 裁決；無法證實就標 excluded</td><td>人工＋LLM</td></tr>
+<tr><td>⑤ Wiki Lint</td><td>frontmatter、來源 ID、斷鏈、含數字的句子有沒有來源標記、resolved 事實有沒有裁決紀錄</td><td>④ 修頁面；缺資料回 ②</td><td><code>lint_wiki.py</code></td></tr>
+<tr><td>⑦ 大綱檢查（新增）</td><td>每頁規劃用的 wiki 頁與事實都存在、沒有 excluded</td><td>④ 先補 Wiki</td><td><code>check_outline.py</code></td></tr>
+<tr><td>⑨ 依據檢查</td><td>每頁的數字都要來自該頁宣告的事實；英文專有名詞都要出現在引用的 wiki 頁；不可出現 excluded 內容</td><td>⑥ 補宣告／⑧ 刪多編的內容</td><td><code>check_slides.py</code></td></tr>
+<tr><td>⑩ 渲染＋目視</td><td>headless Chrome 截圖；文字裁切、內容填滿率、頁腳與引用一致；人工看截圖</td><td>⑧ 改版面</td><td><code>render_check.py</code></td></tr></table>
+<h2>為什麼這樣設計？</h2>
+<ul>
+<li><b>事實跟文字分開管理</b>：LLM 最容易錯的是數字和日期，所以把它們集中到 facts.yaml，每條都要有來源和 status，簡報只能「引用 key」而不是自己寫數字，這樣就能用程式檢查。</li>
+<li><b>檢查越前面越便宜</b>：來源衝突在匯入時就處理，不要等到簡報做完才發現首播日寫錯。</li>
+<li><b>每個檢查都知道該退回哪裡</b>：錯誤分成「Wiki 沒有」「大綱漏宣告」「生成時多編」「版面問題」，分別退回不同節點，而不是整份重做。</li>
+<li><b>檢查器本身也要被檢查</b>：用突變測試（故意塞錯）確認檢查器沒有因為修正而變太鬆。</li>
+</ul>
+</section>
+
+<section class="view" id="run">
+<div class="kicker">步驟四 · 實際執行一次</div><h1>執行紀錄與檢查輸出</h1>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>時間</th>
+<th>節點</th>
+<th>動作</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>23:18</td>
+<td>討論 Discuss</td>
+<td>提出 4 個候選主題（MQTT 安全、IoT 威脅建模、AI Agents、零信任 IoT）</td>
+<td>使用者改選「Ben 10」；議定讀者＝完全沒看過的人、簡報目標＝看完知道故事/道具/作品順序/怎麼入坑</td>
+</tr>
+<tr>
+<td>2</td>
+<td>23:20</td>
+<td>取得 Acquire</td>
+<td>5 次搜尋 + 5 次整頁擷取</td>
+<td>3 頁擷取成功；2 頁（Omnitrix、2016 版）被擷取白名單拒絕 → 退回用搜尋摘要，sources.yaml 標 method: snippet</td>
+</tr>
+<tr>
+<td>3</td>
+<td>23:24</td>
+<td>匯入 Ingest</td>
+<td>寫入 raw/sources.yaml、raw/notes.md</td>
+<td>9 個可作依據來源（S1–S9）＋4 個低可信比對用來源（X1–X4）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>23:24</td>
+<td>匯入 Ingest（交叉比對）</td>
+<td>每個數字跟所有來源比對</td>
+<td>發現 8 個衝突 C1–C8（首播日、集數、電影數、「最長壽」說法、60 億美元零售額…），寫入 conflicts.md</td>
+</tr>
+<tr>
+<td>5</td>
+<td>23:26</td>
+<td>編譯 Compile</td>
+<td>9 個 wiki 頁、facts.yaml 34 條事實</td>
+<td>—</td>
+</tr>
+<tr>
+<td>6</td>
+<td>23:27</td>
+<td>Wiki Lint #1</td>
+<td><code>lint_wiki.py</code></td>
+<td><strong>4 ERROR / 3 WARN</strong>：frontmatter 來源與內文不一致 ×3、電影年份缺來源標記 ×2、事實值未出現在任何頁 ×1</td>
+</tr>
+<tr>
+<td>7</td>
+<td>23:28</td>
+<td>人工審閱</td>
+<td>逐行對照 raw notes</td>
+<td>再找到 3 處 lint 抓不到的：「怪獸週冒險」（來源沒有）、「從墜落外星艙掉出」（混入低可信來源）、Azmuth 句沒有來源</td>
+</tr>
+<tr>
+<td>8</td>
+<td>23:28</td>
+<td>Wiki Lint #2</td>
+<td>修正後重跑</td>
+<td>0 ERROR / 0 WARN ✅</td>
+</tr>
+<tr>
+<td>9</td>
+<td>23:29</td>
+<td>查詢 Query</td>
+<td>寫 slides/outline.yaml：14 頁，每頁＝一個學習者問題＋wiki 頁＋fact keys</td>
+<td>—</td>
+</tr>
+<tr>
+<td>10</td>
+<td>23:31</td>
+<td>生成 Generate v1</td>
+<td>依 outline 產生 slides/index.html</td>
+<td>—</td>
+</tr>
+<tr>
+<td>11</td>
+<td>23:32</td>
+<td>Grounding Check #1</td>
+<td><code>check_slides.py</code></td>
+<td><strong>47 ERROR</strong>，分類：Query 漏宣告事實 24、檢查器自身誤判 17、生成時多編內容 6</td>
+</tr>
+<tr>
+<td>12</td>
+<td>23:34</td>
+<td>修正</td>
+<td>修檢查器（逐文字節點比對、剔除含數字的專有名詞）、補 outline 事實、Wiki 補 Cannonbolt（回到 Compile）、刪掉沒依據的句子</td>
+<td>—</td>
+</tr>
+<tr>
+<td>13</td>
+<td>23:34</td>
+<td>人工語意審閱</td>
+<td>對照 wiki 逐句看</td>
+<td>再刪 3 句沒依據的話（Vilgax「想搶 Omnitrix」、Gwen「聰明」、「爺爺失蹤」不在 wiki 頁）；Max 改成「半退休成員」</td>
+</tr>
+<tr>
+<td>14</td>
+<td>23:35</td>
+<td>Grounding Check #2</td>
+<td>重跑</td>
+<td>0 ERROR ✅</td>
+</tr>
+<tr>
+<td>15</td>
+<td>23:35</td>
+<td>突變測試</td>
+<td>故意塞入「60 億美元」與不存在的名詞</td>
+<td>3/3 被抓到 ✅（確認檢查器沒有變太鬆）</td>
+</tr>
+<tr>
+<td>16</td>
+<td>23:36</td>
+<td>Render Check #1</td>
+<td>headless Chrome 截圖 14 頁</td>
+<td>0 issue，<strong>但目視發現</strong>：大半頁空白、時間軸文字被裁切、兩頁頁腳過期 → 檢查器有盲點</td>
+</tr>
+<tr>
+<td>17</td>
+<td>23:38</td>
+<td>Render Check #2–#4</td>
+<td>加入垂直裁切、內容填滿率、頁腳一致性檢查；調整版面</td>
+<td>#2：2 issue → #3：1 issue → #4：0 ✅</td>
+</tr>
+<tr>
+<td>18</td>
+<td>23:40</td>
+<td>前移檢查</td>
+<td>新增 <code>check_outline.py</code>，在生成前檢查大綱</td>
+<td>0 ERROR ✅</td>
+</tr>
+<tr>
+<td>19</td>
+<td>23:41</td>
+<td>發布 Publish</td>
+<td>簡報與 Wiki 發布為網頁</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h2>檢查原始輸出</h2>
+<details open><summary>Wiki Lint #1（4 ERROR / 3 WARN）</summary><pre>WARN  [man-of-action] frontmatter 列了 [&#x27;S1&#x27;] 但內文沒用到
+WARN  [films-and-media] frontmatter 列了 [&#x27;S8&#x27;] 但內文沒用到
+WARN  [facts.finale_specials] 值「2021 年 4 月 3 部特別篇」沒有出現在任何 wiki 頁面
+ERROR [man-of-action] 內文引用 [&#x27;S6&#x27;] 未列在 frontmatter
+ERROR [films-and-media] 含數字但沒有來源標記：- 動畫：Secret of the Omnitrix（2007）、Destroy All Aliens（2012）、V
+ERROR [films-and-media] 含數字但沒有來源標記：- 真人：Race Against Time（2007）、Alien Swarm（2009）
+ERROR [overview] 內文引用 [&#x27;S3&#x27;, &#x27;S4&#x27;] 未列在 frontmatter
+
+頁面 9｜事實 34｜ERROR 4｜WARN 3
+</pre></details>
+<details><summary>Wiki Lint #2（通過）</summary><pre>
+頁面 9｜事實 34｜ERROR 0｜WARN 0
+</pre></details>
+<details open><summary>依據檢查 #1（47 ERROR）</summary><pre>ERROR [cover] 數字 10 沒有對應的 fact
+ERROR [aliens] 數字 8 沒有對應的 fact
+ERROR [aliens] 數字 8 沒有對應的 fact
+ERROR [aliens] 名詞「accelerate」不在引用的 wiki 頁
+ERROR [aliens] 名詞「Heatblast Wildmutt Diamondhead XLR8 Grey Matter」不在引用的 wiki 頁
+ERROR [aliens] 名詞「Four Arms Stinkfly Ripjaws Upgrade Ghostfreak」不在引用的 wiki 頁
+ERROR [characters] 名詞「Gwen Ben」不在引用的 wiki 頁
+ERROR [timeline] 名詞「Omniverse 2012」不在引用的 wiki 頁
+ERROR [timeline] 名詞「Ultimate Alien 2010」不在引用的 wiki 頁
+ERROR [timeline] 名詞「Ben 10 2005」不在引用的 wiki 頁
+ERROR [timeline] 名詞「Alien Force 2008」不在引用的 wiki 頁
+ERROR [continuity] 數字 2005 沒有對應的 fact
+ERROR [continuity] 數字 2021 沒有對應的 fact
+ERROR [continuity] 數字 4 沒有對應的 fact
+ERROR [continuity] 數字 3 沒有對應的 fact
+ERROR [media] 數字 2006 沒有對應的 fact
+ERROR [media] 數字 2020 沒有對應的 fact
+ERROR [impact] 數字 2 沒有對應的 fact
+ERROR [impact] 名詞「No.2 CN」不在引用的 wiki 頁
+ERROR [start-watching] 數字 2005 沒有對應的 fact
+ERROR [start-watching] 數字 10 沒有對應的 fact
+ERROR [start-watching] 數字 2016 沒有對應的 fact
+ERROR [quiz] 數字 1 沒有對應的 fact
+ERROR [quiz] 數字 8 沒有對應的 fact
+ERROR [quiz] 數字 15 沒有對應的 fact
+ERROR [quiz] 數字 5 沒有對應的 fact
+ERROR [quiz] 數字 100 沒有對應的 fact
+ERROR [quiz] 數字 3 沒有對應的 fact
+ERROR [quiz] 數字 2016 沒有對應的 fact
+ERROR [quiz] 數字 2005 沒有對應的 fact
+ERROR [recap] 引用不存在的 wiki 頁 index
+ERROR [recap] 數字 10 沒有對應的 fact
+ERROR [recap] 數字 2016 沒有對應的 fact
+ERROR [recap] 數字 10 沒有對應的 fact
+ERROR [recap] 數字 10 沒有對應的 fact
+ERROR [recap] 數字 2005 沒有對應的 fact
+ERROR [recap] 數字 2016 沒有對應的 fact
+ERROR [recap] 名詞「ComicBook.com」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ben 10」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ultimate Alien」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ben Tennyson」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ben」不在引用的 wiki 頁
+ERROR [recap] 名詞「conflicts」不在引用的 wiki 頁
+ERROR [recap] 名詞「Omnitrix」不在引用的 wiki 頁
+ERROR [recap] 名詞「Alien Force」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ben 10 LLM Wiki」不在引用的 wiki 頁
+ERROR [recap] 名詞「Gizmodo」不在引用的 wiki 頁
+
+投影片 14｜ERROR 47
+</pre></details>
+<details><summary>依據檢查 #2（通過）</summary><pre>
+投影片 14｜ERROR 0
+</pre></details>
+<details><summary>渲染檢查 #2 → #4</summary><pre>#2
+[
+ {
+  &quot;id&quot;: &quot;cover&quot;,
+  &quot;out&quot;: [
+   &quot;note-missing-wiki:overview&quot;
+  ]
+ },
+ {
+  &quot;id&quot;: &quot;timeline&quot;,
+  &quot;out&quot;: [
+   &quot;clip:bar c1:Ben 102005–200849 集&quot;,
+   &quot;clip:bar c2:Alien Force2008–201046 集&quot;,
+   &quot;clip:bar c3:Ultimate Alien2010–201252 集&quot;,
+   &quot;clip:bar c4:Omniverse2012–201480 集&quot;
+  ]
+ }
+]
+ISSUES 2
+
+#3
+[
+ {
+  &quot;id&quot;: &quot;timeline&quot;,
+  &quot;out&quot;: [
+   &quot;clip:bar c3:Ultimate Alien2010–201252 集&quot;
+  ]
+ }
+]
+ISSUES 1
+
+#4
+[]
+ISSUES 0
+</pre></details>
+<details><summary>大綱檢查（新增節點）</summary><pre>大綱 14 頁｜ERROR 0
+</pre></details>
+<h2>依據檢查 #1 的 47 個錯誤分類</h2>
+<table><tr><th>類型</th><th>數量</th><th>例子</th><th>處理</th></tr>
+<tr><td>⑥ 查詢節點漏宣告事實</td><td>24</td><td>continuity 頁寫了 2005／2021，但大綱沒宣告 original_years、finale_specials 的日期</td><td>補大綱事實；facts 補 note</td></tr>
+<tr><td>⑨ 檢查器自己誤判</td><td>17</td><td>把「Ben 10」「XLR8」的數字當成事實；把相鄰的外星人名字黏成一個名詞</td><td>改成逐文字節點比對、先剔除 Wiki 內的專有名詞</td></tr>
+<tr><td>⑧ 生成時多編內容</td><td>6</td><td>「XLR8 唸起來像 accelerate」、小測驗的「8 歲／5 種／100 種」選項、「No.2」</td><td>刪除，或改用 Wiki 裡有的內容</td></tr></table>
+<p>另外人工語意審閱又抓到 3 句檢查器抓不到的多編內容（例如「Vilgax 一直想搶走 Omnitrix」：Wiki 只寫他是宿敵）。</p>
+</section>
+
+<section class="view" id="reflect">
+<div class="kicker">反思</div><h1>反思</h1>
+<h2>哪一個節點最常出錯？</h2>
+<p><b>⑥ 查詢 Wiki（做大綱）</b>：依據檢查的 47 個錯誤中有 24 個來自這裡。大綱只列了每頁「主要」的事實，生成時卻自然地寫出年份、季數、比較用的數字，結果這些數字在檢查時找不到依據。真正寫錯內容的則是 <b>⑧ 生成</b>：6 個自動抓到加上 3 個人工抓到，都是 LLM 為了讓簡報「更好懂」而補上的說明，看起來很合理，但 Wiki 裡根本沒有。</p>
+<p>資料面最大的風險在 <b>③ 匯入</b>：同一件事在不同來源有 8 處不一致（例如首播日 2005-12-27 vs 2006-01，重啟版 166 集 vs 184 集，電影 4 部 vs 5 部）。因為一開始就把交叉比對放在匯入節點，這些都在 Wiki 階段解決，沒有流到簡報。</p>
+<h2>發現問題後，把檢查往前移到哪一步？</h2>
+<ul>
+<li><b>從「生成後」移到「生成前」</b>：新增 ⑦ 大綱檢查。原本要等簡報做完才知道「這頁用的數字沒有依據」；現在大綱就必須宣告每頁會用到的所有事實，不存在或 excluded 的事實在生成前就擋下，並退回 ④ 先補 Wiki。</li>
+<li><b>從「人工目視」移到「自動檢查」</b>：渲染檢查 #1 顯示 0 個問題，但看截圖發現大片留白和時間軸文字被裁切。把「垂直裁切、內容填滿率、頁腳一致」寫進 <code>render_check.py</code>，之後的版本就會自動抓到。</li>
+<li><b>從「簡報」移到「Wiki」</b>：簡報需要 Cannonbolt 這個事實時，不是直接寫進簡報，而是先補進 Wiki 的 omnitrix 頁（附來源 S7），再讓簡報引用。</li>
+</ul>
+<h2>有沒有因此修改 workflow / graph？為什麼？</h2>
+<p>有，改了三處：</p>
+<ol>
+<li><b>新增節點</b>：⑥ 和 ⑧ 之間加上 ⑦ 大綱檢查（圖中綠色虛線框）。理由：最多錯誤來自大綱，最便宜的修正點就在大綱本身。</li>
+<li><b>新增退回邊</b>：⑧ 生成 → ④ 編譯 Wiki。理由：生成過程發現缺資料時，資料必須先進 Wiki，維持「簡報只能引用 Wiki」的原則，Wiki 也會越用越完整。</li>
+<li><b>強化檢查器並加入突變測試</b>：檢查器自己有 17 個誤判，修正後怕變太鬆，所以故意塞入「60 億美元」和不存在的名詞，確認 3/3 都被抓到。理由：檢查節點也會出錯，需要被驗證。</li>
+</ol>
+<p>還沒解決的限制：依據檢查只能比對數字和英文名詞，中文敘述是否忠於 Wiki（例如「想搶走 Omnitrix」）目前仍要靠人工語意審閱；下一步可以加一個 LLM-as-judge 節點，逐句比對簡報與 Wiki 段落。</p>
+</section>
+</main>
+<script>
+function go(){var h=location.hash.slice(1)||'home';var v=document.getElementById(h);if(!v||!v.classList.contains('view')){h='home';v=document.getElementById('home');}
+document.querySelectorAll('.view').forEach(function(e){e.classList.toggle('on',e===v)});
+document.querySelectorAll('nav a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+h)});window.scrollTo(0,0);}
+addEventListener('hashchange',go);go();
+</script></body></html>

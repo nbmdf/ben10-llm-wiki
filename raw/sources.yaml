@@ -1,0 +1,81 @@
+# 來源登錄表（raw layer）。每篇 ingest 的資料都有一個 ID，Wiki 頁面只能引用這裡登錄過的 ID。
+# accessed: 擷取日期；method: fetch = 讀取整頁摘要；snippet = 只取得搜尋摘要（整頁抓取被拒時的退路）
+S1:
+  title: "Ben 10 (franchise) — Wikipedia"
+  url: https://en.wikipedia.org/wiki/Ben_10
+  accessed: 2026-11-22
+  method: fetch
+  reliability: high
+S2:
+  title: "Ben 10 (2005 TV series) — Wikipedia（含 wikipedia-on-ipfs / wikiwand 鏡像）"
+  url: https://en.wikipedia.org/wiki/Ben_10_(2005_TV_series)
+  accessed: 2026-11-22
+  method: snippet
+  reliability: high
+S3:
+  title: "Ben 10: Alien Force — Wikipedia"
+  url: https://en.wikipedia.org/wiki/Ben_10:_Alien_Force
+  accessed: 2026-11-22
+  method: fetch
+  reliability: high
+S4:
+  title: "Ben 10: Ultimate Alien — Wikipedia"
+  url: https://en.wikipedia.org/wiki/Ben_10:_Ultimate_Alien
+  accessed: 2026-11-22
+  method: fetch
+  reliability: high
+S5:
+  title: "Ben 10: Omniverse／List of Omniverse episodes — Wikipedia"
+  url: https://en.wikipedia.org/wiki/List_of_Ben_10:_Omniverse_episodes
+  accessed: 2026-11-22
+  method: snippet
+  reliability: high
+S6:
+  title: "Ben 10 (2016 TV series) — Wikipedia（含 episode list）"
+  url: https://en.wikipedia.com/wiki/Ben_10_Reboot
+  accessed: 2026-11-22
+  method: snippet   # 整頁 fetch 被 allowlist 拒絕，改用搜尋摘要
+  reliability: high
+S7:
+  title: "Ben Tennyson — Wikipedia"
+  url: https://wikipedia.com/wiki/Ben_Tennyson
+  accessed: 2026-11-22
+  method: snippet
+  reliability: high
+S8:
+  title: "Ben 10 Was First and Foremost for Kids—and Also for Itself — Gizmodo"
+  url: https://gizmodo.com/ben-10-was-first-and-foremost-for-kids-and-also-for-itself-2000703519
+  accessed: 2026-11-22
+  method: snippet
+  reliability: medium
+S9:
+  title: "20 Years Ago, Cartoon Network's Coolest Superhero Show Debuted — ComicBook.com"
+  url: https://comicbook.com/tv-shows/feature/20-years-ago-cartoon-networks-coolest-superhero-show-debuted-a-multiverse-and-its-creators-want-to-bring-it-back/
+  accessed: 2026-11-22
+  method: snippet
+  reliability: medium
+# 下列為「只用來發現衝突、不作為事實依據」的低可信來源
+X1:
+  title: "Ben 10 — Ultimate Pop Culture Wiki (fandom)"
+  url: https://ultimatepopculture.fandom.com/wiki/Ben_10
+  accessed: 2026-11-22
+  method: snippet
+  reliability: low
+X2:
+  title: "Ben 10 — TV Tropes"
+  url: https://tvtropes.org/pmwiki/pmwiki.php/VideoGame/Ben10
+  accessed: 2026-11-22
+  method: snippet
+  reliability: low
+X3:
+  title: "Ben 10 系列 — 萌娘百科"
+  url: https://zh.moegirl.org.cn/en/Ben_10%E7%B3%BB%E5%88%97
+  accessed: 2026-11-22
+  method: snippet
+  reliability: low
+X4:
+  title: "Ben 10 — Boomerang fandom wiki"
+  url: https://boomerang-from-cartoon-network.fandom.com/wiki/Ben_10
+  accessed: 2026-11-22
+  method: snippet
+  reliability: low

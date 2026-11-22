@@ -1,0 +1,51 @@
+<svg viewBox="0 0 980 480" xmlns="http://www.w3.org/2000/svg" font-family="Noto Sans TC, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#93a1b3"/></marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff8a65"/></marker>
+  </defs>
+  <style>
+    .w{fill:#141b24;stroke:#3a4a60;stroke-width:1.5}
+    .c{fill:#231d10;stroke:#ffb84d;stroke-width:1.8}
+    .n{fill:#122015;stroke:#8be36a;stroke-width:1.8;stroke-dasharray:6 4}
+    .t{fill:#e9eef4;font-size:15px;font-weight:700;text-anchor:middle}
+    .s{fill:#93a1b3;font-size:11.5px;text-anchor:middle}
+    .f{stroke:#93a1b3;stroke-width:1.6;fill:none;marker-end:url(#a)}
+    .b{stroke:#ff8a65;stroke-width:1.5;fill:none;stroke-dasharray:5 4;marker-end:url(#r)}
+    .bl{fill:#ff8a65;font-size:11.5px}
+    .row{fill:#5d6b7d;font-size:12px;letter-spacing:.1em}
+  </style>
+  <text x="20" y="40" class="row">建立 WIKI</text>
+  <text x="20" y="250" class="row">產生簡報</text>
+  <!-- row 1 -->
+  <rect class="w" x="20" y="70" width="130" height="58" rx="10"/><text class="t" x="85" y="96">① 討論</text><text class="s" x="85" y="114">主題／讀者／範圍</text>
+  <rect class="w" x="190" y="70" width="130" height="58" rx="10"/><text class="t" x="255" y="96">② 取得</text><text class="s" x="255" y="114">搜尋＋擷取網頁</text>
+  <rect class="c" x="360" y="70" width="130" height="58" rx="10"/><text class="t" x="425" y="96">③ 匯入＋比對</text><text class="s" x="425" y="114">登錄來源、交叉比對</text>
+  <rect class="w" x="530" y="70" width="130" height="58" rx="10"/><text class="t" x="595" y="96">④ 編譯 Wiki</text><text class="s" x="595" y="114">頁面＋facts.yaml</text>
+  <rect class="c" x="700" y="70" width="130" height="58" rx="10"/><text class="t" x="765" y="96">⑤ Wiki Lint</text><text class="s" x="765" y="114">來源／斷鏈／衝突</text>
+  <path class="f" d="M150,99 H188"/><path class="f" d="M320,99 H358"/><path class="f" d="M490,99 H528"/><path class="f" d="M660,99 H698"/>
+  <!-- row1 back edges -->
+  <path class="b" d="M745,70 C730,30 625,30 610,68"/><text class="bl" x="672" y="44">失敗 → 修頁面</text>
+  <path class="b" d="M790,70 C780,2 270,2 262,68"/><text class="bl" x="440" y="14">缺資料 → 回去找新來源</text>
+  <path class="b" d="M440,70 C436,46 400,46 392,68"/><text class="bl" x="360" y="50">衝突 → 裁決</text>
+  <!-- down -->
+  <path class="f" d="M765,128 V175 H85 V268"/>
+  <!-- row 2 -->
+  <rect class="w" x="20" y="270" width="130" height="58" rx="10"/><text class="t" x="85" y="296">⑥ 查詢 Wiki</text><text class="s" x="85" y="314">大綱：問題＋事實</text>
+  <rect class="n" x="190" y="270" width="130" height="58" rx="10"/><text class="t" x="255" y="296">⑦ 大綱檢查</text><text class="s" x="255" y="314">反思後新增</text>
+  <rect class="w" x="360" y="270" width="130" height="58" rx="10"/><text class="t" x="425" y="296">⑧ 生成簡報</text><text class="s" x="425" y="314">HTML 投影片</text>
+  <rect class="c" x="530" y="270" width="130" height="58" rx="10"/><text class="t" x="595" y="296">⑨ 依據檢查</text><text class="s" x="595" y="314">數字／名詞可追溯</text>
+  <rect class="c" x="700" y="270" width="130" height="58" rx="10"/><text class="t" x="765" y="296">⑩ 渲染＋目視</text><text class="s" x="765" y="314">截圖、裁切、留白</text>
+  <rect class="w" x="850" y="270" width="110" height="58" rx="10"/><text class="t" x="905" y="296">⑪ 發布</text><text class="s" x="905" y="314">網頁連結</text>
+  <path class="f" d="M150,299 H188"/><path class="f" d="M320,299 H358"/><path class="f" d="M490,299 H528"/><path class="f" d="M660,299 H698"/><path class="f" d="M830,299 H848"/>
+  <!-- row2 back edges -->
+  <path class="b" d="M255,270 C270,220 560,200 585,130"/><text class="bl" x="330" y="225">缺事實 → 先補 Wiki</text>
+  <path class="b" d="M440,270 C470,230 590,200 605,130"/><text class="bl" x="488" y="250">生成需要新事實 → 回 ④</text>
+  <path class="b" d="M570,328 C560,372 120,372 90,330"/><text class="bl" x="280" y="384">漏宣告事實 → 回 ⑥</text>
+  <path class="b" d="M615,328 C610,412 450,412 440,330"/><text class="bl" x="470" y="420">多編內容 → 重新生成 ⑧</text>
+  <path class="b" d="M780,328 C775,465 430,465 420,330"/><text class="bl" x="560" y="462">裁切／留白 → 改版面 ⑧</text>
+  <!-- legend -->
+  <rect class="w" x="850" y="380" width="16" height="12" rx="3"/><text x="872" y="391" fill="#93a1b3" font-size="12">處理節點</text>
+  <rect class="c" x="850" y="400" width="16" height="12" rx="3"/><text x="872" y="411" fill="#93a1b3" font-size="12">檢查節點</text>
+  <rect class="n" x="850" y="420" width="16" height="12" rx="3"/><text x="872" y="431" fill="#93a1b3" font-size="12">反思後新增</text>
+  <line x1="850" y1="446" x2="866" y2="446" class="b"/><text x="872" y="450" fill="#93a1b3" font-size="12">失敗退回</text>
+</svg>

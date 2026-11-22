@@ -1,0 +1,49 @@
+ERROR [cover] 數字 10 沒有對應的 fact
+ERROR [aliens] 數字 8 沒有對應的 fact
+ERROR [aliens] 數字 8 沒有對應的 fact
+ERROR [aliens] 名詞「accelerate」不在引用的 wiki 頁
+ERROR [aliens] 名詞「Heatblast Wildmutt Diamondhead XLR8 Grey Matter」不在引用的 wiki 頁
+ERROR [aliens] 名詞「Four Arms Stinkfly Ripjaws Upgrade Ghostfreak」不在引用的 wiki 頁
+ERROR [characters] 名詞「Gwen Ben」不在引用的 wiki 頁
+ERROR [timeline] 名詞「Omniverse 2012」不在引用的 wiki 頁
+ERROR [timeline] 名詞「Ultimate Alien 2010」不在引用的 wiki 頁
+ERROR [timeline] 名詞「Ben 10 2005」不在引用的 wiki 頁
+ERROR [timeline] 名詞「Alien Force 2008」不在引用的 wiki 頁
+ERROR [continuity] 數字 2005 沒有對應的 fact
+ERROR [continuity] 數字 2021 沒有對應的 fact
+ERROR [continuity] 數字 4 沒有對應的 fact
+ERROR [continuity] 數字 3 沒有對應的 fact
+ERROR [media] 數字 2006 沒有對應的 fact
+ERROR [media] 數字 2020 沒有對應的 fact
+ERROR [impact] 數字 2 沒有對應的 fact
+ERROR [impact] 名詞「No.2 CN」不在引用的 wiki 頁
+ERROR [start-watching] 數字 2005 沒有對應的 fact
+ERROR [start-watching] 數字 10 沒有對應的 fact
+ERROR [start-watching] 數字 2016 沒有對應的 fact
+ERROR [quiz] 數字 1 沒有對應的 fact
+ERROR [quiz] 數字 8 沒有對應的 fact
+ERROR [quiz] 數字 15 沒有對應的 fact
+ERROR [quiz] 數字 5 沒有對應的 fact
+ERROR [quiz] 數字 100 沒有對應的 fact
+ERROR [quiz] 數字 3 沒有對應的 fact
+ERROR [quiz] 數字 2016 沒有對應的 fact
+ERROR [quiz] 數字 2005 沒有對應的 fact
+ERROR [recap] 引用不存在的 wiki 頁 index
+ERROR [recap] 數字 10 沒有對應的 fact
+ERROR [recap] 數字 2016 沒有對應的 fact
+ERROR [recap] 數字 10 沒有對應的 fact
+ERROR [recap] 數字 10 沒有對應的 fact
+ERROR [recap] 數字 2005 沒有對應的 fact
+ERROR [recap] 數字 2016 沒有對應的 fact
+ERROR [recap] 名詞「ComicBook.com」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ben 10」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ultimate Alien」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ben Tennyson」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ben」不在引用的 wiki 頁
+ERROR [recap] 名詞「conflicts」不在引用的 wiki 頁
+ERROR [recap] 名詞「Omnitrix」不在引用的 wiki 頁
+ERROR [recap] 名詞「Alien Force」不在引用的 wiki 頁
+ERROR [recap] 名詞「Ben 10 LLM Wiki」不在引用的 wiki 頁
+ERROR [recap] 名詞「Gizmodo」不在引用的 wiki 頁
+
+投影片 14｜ERROR 47

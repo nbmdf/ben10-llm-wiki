@@ -1,0 +1,18 @@
+[
+ {
+  "id": "cover",
+  "out": [
+   "note-missing-wiki:overview"
+  ]
+ },
+ {
+  "id": "timeline",
+  "out": [
+   "clip:bar c1:Ben 102005–200849 集",
+   "clip:bar c2:Alien Force2008–201046 集",
+   "clip:bar c3:Ultimate Alien2010–201252 集",
+   "clip:bar c4:Omniverse2012–201480 集"
+  ]
+ }
+]
+ISSUES 2
